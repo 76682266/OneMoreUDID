@@ -61,7 +61,7 @@ module OneMoreUDID
               action do
                 ::Mechanize.instance_method(:get).bind(self).call(uri, parameters, referer, headers)
               end
-              message 'Loading page... '+'done'.color(:green)
+              message 'Loading page... '+'done' #.color(:green)
             end
 
             return page unless page.respond_to?(:title)
@@ -108,7 +108,7 @@ module OneMoreUDID
               action do
                 ::Mechanize.instance_method(:get).bind(self).call(uri, parameters, referer, headers)
               end
-              message 'Loading page... '+'done'.color(:green)
+              message 'Loading page... '+'done'#.color(:green)
             end
 
             return page unless page.respond_to?(:title)
@@ -170,11 +170,15 @@ module OneMoreUDID
     end
 
     def list_profiles()
-      try{@agent.list_profiles(:distribution)}
+      try{@agent.list_profiles(:development)}
     end
+    
+    #def list_profiles2()
+    #  try{@agent.list_profiles(:distrubution)}
+    #end
 
     def update_profile(profile_name)
-      profiles = try{@agent.list_profiles(:distribution)}
+      profiles = try{@agent.list_profiles(:development)}
       profile = (profiles.select { |profile| profile.name == profile_name }).first
 
       if !profile
@@ -202,7 +206,7 @@ module OneMoreUDID
     end
 
     def download_new_profile(profile_name)
-      profiles = try{@agent.list_profiles(:distribution)}
+      profiles = try{@agent.list_profiles(:development)}
       profile = (profiles.select { |profile| profile.name == profile_name }).first
 
       if !profile
